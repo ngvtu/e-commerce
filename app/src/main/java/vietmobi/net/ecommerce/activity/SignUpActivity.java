@@ -102,16 +102,16 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void signUp() {
-        validateName(edtName);
-        validateEmailAddress(edtEmail);
-        validatePassword(edtPassword);
+//        validateName(edtName);
+//        validateEmailAddress(edtEmail);
+//        validatePassword(edtPassword);
 
-        if (validateName(edtName) && validateEmailAddress(edtEmail) && validatePassword(edtPassword)){
+//        if (validateName(edtName) && validateEmailAddress(edtEmail) && validatePassword(edtPassword)){
             Intent intent = new Intent(this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
-        }
+//        }
     }
 
     private boolean validateEmailAddress(EditText email){
