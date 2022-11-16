@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="164dp"
+    android:layout_margin="5dp"
+    android:background="@drawable/border_image"
     android:layout_height="260dp">
 
-
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imgItem"
         android:layout_width="177dp"
         android:layout_height="177dp"
         android:scaleType="centerCrop"
@@ -32,7 +33,7 @@
         android:id="@+id/imageView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView2"
+        android:layout_below="@+id/imgItem"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="4dp"
@@ -42,7 +43,7 @@
 
     <TextView
         android:id="@+id/tvBranchName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
@@ -53,5 +54,89 @@
         android:textColor="@color/gray"
         android:textSize="11sp" />
 
+    <TextView
+        android:id="@+id/tvNameItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:fontFamily="@font/metropolis_semi_bold"
+        android:layout_alignStart="@+id/tvBranchName"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="24dp"
+        android:maxLength="18"
+        android:textColor="@color/black"
+        android:text="Item Produce" />
+
+    <TextView
+        android:id="@+id/priceOfItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvNameItem"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="9dp"
+        android:textSize="14sp"
+        android:fontFamily="@font/metropolis_medium"
+        android:textColor="@color/black"
+        android:layout_marginBottom="5dp"
+        android:text="10$" />
+    <TextView
+        android:id="@+id/NewPriceOfItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvNameItem"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="40dp"
+        android:textSize="14sp"
+        android:fontFamily="@font/metropolis_medium"
+        android:textColor="@color/red_app"
+        android:layout_marginBottom="5dp"
+        android:text="10$" />
+
+    <TextView
+        android:id="@+id/OldPriceOfItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvNameItem"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="9dp"
+        android:visibility="gone"
+        android:layout_marginBottom="1dp"
+        android:fontFamily="@font/metropolis_medium"
+        android:text="11$"
+        android:textColor="@color/gray"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvIsNew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_black"
+        android:fontFamily="@font/metropolis_semi_bold"
+        android:gravity="center"
+        android:text="NEW"
+        android:textColor="@color/white"
+        android:textSize="11sp" />
+    <TextView
+        android:id="@+id/tvIsSale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="8dp"
+        android:visibility="gone"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_red"
+        android:fontFamily="@font/metropolis_semi_bold"
+        android:gravity="center"
+        android:text="-20%"
+        android:textColor="@color/white"
+        android:textSize="11sp" />
 
 </RelativeLayout>
