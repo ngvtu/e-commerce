@@ -65,7 +65,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
     }
 
     private void backToSignUp() {
-        Intent intent = new Intent(this, SignUpActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();

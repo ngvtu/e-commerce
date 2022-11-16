@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.home:
                         viewPager.setCurrentItem(0);
-
 //                        HomeFragment homeFragment = (HomeFragment) viewPager.getAdapter().instantiateItem(viewPager, 0);
                         break;
                     case R.id.shop:

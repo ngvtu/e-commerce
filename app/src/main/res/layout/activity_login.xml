@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="#E5E5E5"
+    android:backgroundTint="@color/color_back_ground"
     android:padding="12dp"
     tools:context=".activity.LoginActivity">
 
@@ -35,6 +35,32 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_back" />
 
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/metropolis_medium"
+        android:text="@string/text_welcome"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/btnGotoSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/metropolis_medium"
+        android:text="Sign Up"
+        android:textColor="@color/red_app"
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout_email"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -42,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="16dp"
         android:hint="Email"
         app:boxBackgroundColor="@color/white"
         app:boxCornerRadiusBottomEnd="15dp"
@@ -54,9 +80,8 @@
         app:endIconTint="@color/success"
         app:helperTextTextColor="#9A5E5E"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.525"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBack"
+        app:layout_constraintTop_toBottomOf="@+id/btnGotoSignUp"
         app:startIconDrawable="@drawable/ic_email">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -96,16 +121,27 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
-        android:padding="10dp"
         app:endIconMode="custom"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.881"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_password">
+
+
+        <CheckBox
+            android:id="@+id/cbxRemember"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="@color/red_app"
+            android:fontFamily="@font/metropolis_medium"
+            android:text="Remember me"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/textView2"
@@ -113,7 +149,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/metropolis_medium"
-            android:text="Forgot your password?"
+            android:text="Forgot your password? "
             android:textColor="@color/black"
             android:textSize="15sp" />
 
@@ -122,7 +158,6 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_gravity="center"
-            android:layout_marginStart="20dp"
             app:srcCompat="@drawable/ic_go_to" />
 
     </LinearLayout>
@@ -132,7 +167,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="@drawable/bg_boder_red"
+        android:background="@drawable/bg_border_red"
         android:fontFamily="@font/metropolis_medium"
         android:text="login"
         android:textColor="@color/white"

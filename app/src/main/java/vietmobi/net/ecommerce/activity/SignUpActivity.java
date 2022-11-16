@@ -80,18 +80,18 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void backToExit() {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Intent intent = new Intent(this, IntroActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        finish();
     }
 
     private void loginGg() {
-        Toast.makeText(this, "Comming soon", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
     }
 
     private void loginFb() {
-        Toast.makeText(this, "Comming soon", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
     }
 
     private void gotoLogin() {
