@@ -27,9 +27,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     String email, password;
     private SharedPreferences.Editor loginPrefsEditor;
     private Boolean saveLogin;
-    private Button btnLogin;
     private CheckBox cbxRemember;
-    private TextView btnGotoSignUp;
+    private TextView btnGotoSignUp, btnLogin;
     private TextInputLayout layout_email, layout_password;
     private TextInputEditText edtEmail, edtPassword;
     private ImageView btnGotoForgot, btnLoginGg, btnLoginFb, btnBack;

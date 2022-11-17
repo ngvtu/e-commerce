@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -18,8 +19,8 @@ import vietmobi.net.ecommerce.R;
 
 public class ForgotPasswordActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button btnSend;
     ImageView btnBack;
+    TextView btnSend;
     TextInputLayout layout_email;
     TextInputEditText edtEmail;
 

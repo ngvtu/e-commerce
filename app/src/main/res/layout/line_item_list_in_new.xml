@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="164dp"
     android:layout_margin="10dp"
-    android:background="@drawable/border_image"
+    android:elevation="10dp"
+    android:background="@drawable/border_item"
     android:layout_height="260dp">
 
     <ImageView
@@ -111,8 +112,8 @@
 
     <TextView
         android:id="@+id/tvIsNew"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="24dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="8dp"
