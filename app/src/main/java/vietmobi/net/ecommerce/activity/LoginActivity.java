@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,9 +16,8 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.util.regex.Pattern;
-
 import vietmobi.net.ecommerce.R;
+import vietmobi.net.ecommerce.activity.main.MainActivity;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 

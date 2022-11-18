@@ -1,21 +1,18 @@
-package vietmobi.net.ecommerce.fragment;
+package vietmobi.net.ecommerce.activity.oder;
 
-import android.content.Context;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toolbar;
 
 import vietmobi.net.ecommerce.R;
 
 
-public class ProfileFragment extends Fragment {
-    Context context;
+public class DeliveredFragment extends Fragment {
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,11 +24,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_profile, container, false);
-        initViews(view);
+        View view =  inflater.inflate(R.layout.fragment_delivered, container, false);
         return view;
-    }
-
-    private void initViews(View view) {
     }
 }

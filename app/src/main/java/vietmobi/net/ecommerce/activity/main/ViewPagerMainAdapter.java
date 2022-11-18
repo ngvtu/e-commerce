@@ -1,18 +1,18 @@
-package vietmobi.net.ecommerce.adapter;
+package vietmobi.net.ecommerce.activity.main;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import vietmobi.net.ecommerce.fragment.BagFragment;
-import vietmobi.net.ecommerce.fragment.FavoriteFragment;
-import vietmobi.net.ecommerce.fragment.HomeFragment;
-import vietmobi.net.ecommerce.fragment.ProfileFragment;
-import vietmobi.net.ecommerce.fragment.ShopFragment;
+import vietmobi.net.ecommerce.activity.main.BagFragment;
+import vietmobi.net.ecommerce.activity.main.FavoriteFragment;
+import vietmobi.net.ecommerce.activity.main.HomeFragment;
+import vietmobi.net.ecommerce.activity.main.ProfileFragment;
+import vietmobi.net.ecommerce.activity.main.ShopFragment;
 
-public class ViewPagerAdapter extends FragmentStatePagerAdapter {
-    public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
+public class ViewPagerMainAdapter extends FragmentStatePagerAdapter {
+    public ViewPagerMainAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
     }
 

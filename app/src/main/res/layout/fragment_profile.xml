@@ -5,18 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_back_ground"
-    tools:context=".fragment.ProfileFragment">
+    tools:context=".activity.main.ProfileFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/color_back_ground"
-        android:elevation="4dp"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+
 
 
     <TextView
@@ -92,9 +85,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar"
+        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="173dp">
+        android:layout_marginTop="220dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -457,7 +450,7 @@
                         android:layout_marginStart="17dp"
                         android:layout_marginTop="11dp"
                         android:fontFamily="@font/metropolis_semi_bold"
-                        android:text="Promocodes"
+                        android:text="Settings"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 

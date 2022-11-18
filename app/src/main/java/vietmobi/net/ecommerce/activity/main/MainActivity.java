@@ -1,26 +1,30 @@
-package vietmobi.net.ecommerce.activity;
+package vietmobi.net.ecommerce.activity.main;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import vietmobi.net.ecommerce.R;
-import vietmobi.net.ecommerce.adapter.ViewPagerAdapter;
-import vietmobi.net.ecommerce.fragment.BagFragment;
-import vietmobi.net.ecommerce.fragment.FavoriteFragment;
-import vietmobi.net.ecommerce.fragment.HomeFragment;
-import vietmobi.net.ecommerce.fragment.ProfileFragment;
-import vietmobi.net.ecommerce.fragment.ShopFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     BottomNavigationView bottomNavigation;
     ViewPager viewPager;
+    Toolbar toolbar;
+    private boolean doubleBackToExitPressedOnce = false;
+    private MenuItem menuItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +32,26 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initViews();
+        getSupportActionBar();
+        setSupportActionBar(toolbar);
         addEvents();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce){
+            super.onBackPressed();
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
     }
 
     private void addEvents() {
@@ -60,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        ViewPagerMainAdapter viewPagerAdapter = new ViewPagerMainAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setOffscreenPageLimit(4);
 
@@ -98,8 +121,46 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_item, menu);
+        super.onCreateOptionsMenu(menu);
+        menuItem = menu.findItem(R.id.itemSearch);
+        menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW | MenuItem.SHOW_AS_ACTION_IF_ROOM);
+
+        SearchView searchView = (SearchView) menuItem.getActionView();
+//        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+
+        menuItem.setActionView(searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        return true;
+    }
+
     private void initViews() {
         bottomNavigation = findViewById(R.id.bottomNavigation);
         viewPager = findViewById(R.id.viewPager);
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 }

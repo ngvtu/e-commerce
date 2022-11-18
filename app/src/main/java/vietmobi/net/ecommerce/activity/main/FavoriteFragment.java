@@ -1,4 +1,4 @@
-package vietmobi.net.ecommerce.fragment;
+package vietmobi.net.ecommerce.activity.main;
 
 import android.os.Bundle;
 
@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import vietmobi.net.ecommerce.R;
 
-public class BagFragment extends Fragment {
+public class FavoriteFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -22,7 +22,7 @@ public class BagFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_bag, container, false);
+        View view =  inflater.inflate(R.layout.fragment_favorite, container, false);
         return view;
     }
 }

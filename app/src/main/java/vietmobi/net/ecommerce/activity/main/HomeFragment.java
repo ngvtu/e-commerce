@@ -1,4 +1,4 @@
-package vietmobi.net.ecommerce.fragment;
+package vietmobi.net.ecommerce.activity.main;
 
 import android.os.Bundle;
 

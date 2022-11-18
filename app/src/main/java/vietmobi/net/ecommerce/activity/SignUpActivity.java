@@ -18,6 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import vietmobi.net.ecommerce.R;
+import vietmobi.net.ecommerce.activity.main.MainActivity;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 

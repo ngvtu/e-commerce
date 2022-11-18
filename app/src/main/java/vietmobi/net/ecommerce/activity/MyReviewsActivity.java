@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import vietmobi.net.ecommerce.R;
 
-public class MyOrdersActivity extends AppCompatActivity {
+public class MyReviewsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_order);
+        setContentView(R.layout.activity_my_reviews);
     }
 }

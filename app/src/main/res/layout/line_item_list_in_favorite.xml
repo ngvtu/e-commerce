@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="343dp"
+    android:layout_width="match_parent"
     android:layout_height="116dp"
     android:layout_margin="10dp">
 
     <RelativeLayout
-        android:layout_width="343dp"
+        android:layout_width="match_parent"
         android:layout_height="104dp"
         android:background="@drawable/border_item"
         android:elevation="10dp">
@@ -184,9 +184,8 @@
             android:id="@+id/btnRemove"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="303dp"
+            android:layout_alignParentEnd="true"
             android:padding="14dp"
             android:src="@drawable/ic_x"
             app:tint="@color/gray" />
@@ -238,6 +237,8 @@
         android:id="@+id/imageButton"
         android:layout_width="36dp"
         android:layout_height="36dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginStart="306dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="1dp"
