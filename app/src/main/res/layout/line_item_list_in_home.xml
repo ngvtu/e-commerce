@@ -8,21 +8,34 @@
     android:background="@drawable/border_item"
     android:layout_height="260dp">
 
-    <ImageView
-        android:id="@+id/imgItem"
-        android:layout_width="177dp"
-        android:layout_height="177dp"
-        android:scaleType="centerCrop"
-        android:cropToPadding="true"
-        android:padding="4dp"
-        android:src="@drawable/img" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            app:cardCornerRadius="10dp"
+            android:layout_height="177dp">
+
+            <ImageView
+                android:id="@+id/imgItem"
+                android:layout_width="177dp"
+                android:layout_height="177dp"
+                android:scaleType="centerCrop"
+                android:cropToPadding="true"
+                android:padding="4dp"
+                android:src="@drawable/img" />
+
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 
     <ImageButton
         android:id="@+id/btnAddFavorite"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="153dp"
         android:layout_marginEnd="6dp"
         android:layout_marginBottom="67dp"
         android:background="@drawable/button_shadow"
@@ -34,7 +47,6 @@
         android:id="@+id/imvRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imgItem"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="4dp"
@@ -46,9 +58,7 @@
         android:id="@+id/tvBranchName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="8dp"
         android:layout_marginBottom="46dp"
         android:fontFamily="@font/metropolis_regular"
         android:text="Style"
@@ -69,7 +79,7 @@
         android:text="Item Produce" />
 
     <TextView
-        android:id="@+id/priceOfItem"
+        android:id="@+id/tvPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/tvNameItem"
@@ -82,7 +92,7 @@
         android:layout_marginBottom="5dp"
         android:text="10$" />
     <TextView
-        android:id="@+id/NewPriceOfItem"
+        android:id="@+id/tvPriceNew"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/tvNameItem"
@@ -96,7 +106,7 @@
         android:text="10$" />
 
     <TextView
-        android:id="@+id/OldPriceOfItem"
+        android:id="@+id/tvPriceOld"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/tvNameItem"
@@ -124,6 +134,7 @@
         android:text="NEW"
         android:textColor="@color/white"
         android:textSize="11sp" />
+
     <TextView
         android:id="@+id/tvIsSale"
         android:layout_width="wrap_content"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="@color/color_back_ground"
-    android:padding="12dp"
+    android:padding="14dp"
     tools:context=".activity.SignUpActivity">
 
     <TextView
@@ -30,7 +30,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_back" />
@@ -163,14 +163,16 @@
 
     </LinearLayout>
 
-    <Button
+    <TextView
         android:id="@+id/btnSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:elevation="10dp"
+        android:layout_height="48dp"
+        android:gravity="center"
         android:layout_marginTop="16dp"
         android:background="@drawable/bg_border_red"
         android:fontFamily="@font/metropolis_medium"
-        android:text="Sign up"
+        android:text="SIGN UP"
         android:textColor="@color/white"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
