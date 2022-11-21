@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="480dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg_dialog_select_size"
+    android:layout_height="470dp"
+    android:backgroundTint="@color/color_back_ground"
     android:padding="14dp"
     tools:ignore="MissingDefaultResource">
 
@@ -21,142 +22,97 @@
     <TextView
         android:id="@+id/textView11"
         android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:fontFamily="@font/metropolis_semi_bold"
-        android:gravity="center"
-        android:text="Password Change"
+        android:text="Update information"
         android:textColor="@color/black"
         android:textSize="18sp" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layout_old_password"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="80dp"
-        android:hint="Old password"
-        app:boxBackgroundColor="@color/white"
-        app:boxCornerRadiusBottomEnd="10dp"
-        app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
-        app:boxCornerRadiusTopStart="10dp"
-        app:endIconMode="password_toggle"
-        app:helperTextTextColor="@android:color/holo_red_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:startIconDrawable="@drawable/ic_lock_old">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtOldPassword"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:fontFamily="@font/metropolis_medium"
-            android:inputType="textPassword" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="160dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/metropolis_medium"
-            android:text="Forgot your password? "
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-
-        <ImageView
-            android:id="@+id/btnGotoForgot"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/ic_go_to" />
-    </LinearLayout>
+        android:layout_marginStart="10dp"
+        android:id="@+id/imgUserUpdate"
+        android:layout_marginTop="90dp"
+        android:layout_marginEnd="140dp"
+        android:src="@drawable/img" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layout_new_password"
+        android:id="@+id/layout_change_name"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="200dp"
-        android:hint="New Password"
+        android:hint="Change or Set your name"
         app:boxBackgroundColor="@color/white"
         app:boxCornerRadiusBottomEnd="10dp"
         app:boxCornerRadiusBottomStart="10dp"
         app:boxCornerRadiusTopEnd="10dp"
         app:boxCornerRadiusTopStart="10dp"
-        app:endIconMode="password_toggle"
         app:helperTextTextColor="@android:color/holo_red_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:startIconDrawable="@drawable/ic_lock_new">
+        app:startIconDrawable="@drawable/ic_person">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtNewPassword"
+            android:id="@+id/edtNewName"
             android:layout_width="match_parent"
             android:layout_height="58dp"
             android:fontFamily="@font/metropolis_medium"
-            android:inputType="textPassword" />
+            android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
+
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layout_confirm_password"
+        android:id="@+id/layout_change_email"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="280dp"
-        android:hint="Repeat New Password"
+        android:hint="New email"
         app:boxBackgroundColor="@color/white"
         app:boxCornerRadiusBottomEnd="10dp"
         app:boxCornerRadiusBottomStart="10dp"
         app:boxCornerRadiusTopEnd="10dp"
         app:boxCornerRadiusTopStart="10dp"
-        app:endIconMode="password_toggle"
         app:helperTextTextColor="@android:color/holo_red_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:startIconDrawable="@drawable/ic_lock_repeat">
+        app:startIconDrawable="@drawable/ic_email">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtConfirmPassword"
+            android:id="@+id/edtNewEmail"
             android:layout_width="match_parent"
             android:layout_height="58dp"
             android:fontFamily="@font/metropolis_medium"
-            android:inputType="textPassword" />
+            android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/btnSavePass"
+        android:id="@+id/btnUpdate"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="394dp"
         android:layout_marginEnd="4dp"
-        android:background="@drawable/bg_border_red"
-        android:elevation="4dp"
-        android:fontFamily="@font/metropolis_medium"
         android:gravity="center"
-        android:text="SAVE PASSWORD"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:fontFamily="@font/metropolis_medium"
+        android:layout_alignParentStart="true"
+        android:elevation="4dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/bg_border_red"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="370dp"
+        android:text="UPDATE INFORMATION" />
 
 </RelativeLayout>

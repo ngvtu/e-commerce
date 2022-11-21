@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import vietmobi.net.ecommerce.R;
 import vietmobi.net.ecommerce.activity.AddressesActivity;
 import vietmobi.net.ecommerce.activity.oder.MyOrdersActivity;
@@ -30,7 +31,7 @@ import vietmobi.net.ecommerce.activity.settings.SettingsActivity;
 public class ProfileFragment extends Fragment implements View.OnClickListener {
     CardView cvMyOder, cvAddresses, cvPromoCodes, cvPaymentMethods, cvMyReviews, cvSettings;
     TextView tvNameUser, tvEmailUser;
-    ImageView imgUser;
+    CircleImageView imgUser;
 
     Context context;
 
