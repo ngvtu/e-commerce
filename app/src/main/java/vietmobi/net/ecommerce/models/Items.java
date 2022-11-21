@@ -1,12 +1,21 @@
 package vietmobi.net.ecommerce.models;
 
 public class Items {
-    private int id;
+    public int getImgItems() {
+        return imgItems;
+    }
+
+    public void setImgItems(int imgItems) {
+        this.imgItems = imgItems;
+    }
+
+    private int id, imgItems;
     private String itemName, ofBranch, category;
     private Float price, oldPrice, newPrice;
     private boolean isSale, isFavorite;
 
-    public Items(String itemName, String ofBranch, String category, Float price, Float oldPrice, Float newPrice, boolean isSale, boolean isFavorite) {
+    public Items(int imgItems, String itemName, String ofBranch, String category, Float price, Float oldPrice, Float newPrice, boolean isSale, boolean isFavorite) {
+        this.imgItems = imgItems;
         this.itemName = itemName;
         this.ofBranch = ofBranch;
         this.category = category;
@@ -17,7 +26,9 @@ public class Items {
         this.isFavorite = isFavorite;
     }
 
-    public Items(String itemName, String ofBranch, String category, Float price, boolean isSale, boolean isFavorite) {
+
+    public Items(int imgItems, String itemName, String ofBranch, String category, Float price, boolean isSale, boolean isFavorite) {
+        this.imgItems = imgItems;
         this.itemName = itemName;
         this.ofBranch = ofBranch;
         this.category = category;
@@ -26,14 +37,25 @@ public class Items {
         this.isFavorite = isFavorite;
     }
 
-    public Items(String itemName, String ofBranch, String category, Float price) {
+    public Items(int imgItems, String itemName, String ofBranch, String category, Float price) {
+        this.imgItems = imgItems;
         this.itemName = itemName;
         this.ofBranch = ofBranch;
         this.category = category;
         this.price = price;
     }
 
+    public Items(int imgItems, String itemName, String ofBranch, Float price, Float oldPrice, Float newPrice) {
+        this.imgItems = imgItems;
+        this.itemName = itemName;
+        this.ofBranch = ofBranch;
+        this.price = price;
+        this.oldPrice = oldPrice;
+        this.newPrice = newPrice;
+    }
+
     public Items() {
+
     }
 
     public int getId() {

@@ -1,10 +1,14 @@
 package vietmobi.net.ecommerce.activity;
 
+import static android.content.ContentValues.TAG;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.CheckBox;
@@ -13,13 +17,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import vietmobi.net.ecommerce.R;
 import vietmobi.net.ecommerce.activity.main.MainActivity;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+
+    protected FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
 
     private SharedPreferences loginPreferences;
     String email, password;
@@ -110,6 +120,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void loginGg() {
         Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
+
+
     }
 
     private void loginFb() {
@@ -138,10 +150,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             loginPrefsEditor.commit();
         }
         if (validateEmailAddress(edtEmail) && validatePassword(edtPassword)) {
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
+            mFirebaseAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                layout_password.setError("Password or email not match");
+                                edtEmail.requestFocus();
+                            }
+                        }
+                    });
+
+
         }
     }
 
@@ -160,15 +187,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private boolean validatePassword(EditText password) {
         String pass = password.getText().toString();
-        if (!pass.isEmpty() && pass.equals(PASS)) {
+        if (!pass.isEmpty()) {
             layout_password.setError("");
+            layout_password.setEndIconDrawable(R.drawable.ic_tick);
             return true;
         }
-        if (!pass.equals(PASS)) {
-            layout_password.setError("Password not match");
-            edtPassword.requestFocus();
-            return false;
-        } else {
+        else {
             layout_password.setError("Password not null");
             edtPassword.requestFocus();
             return false;

@@ -2,6 +2,7 @@ package vietmobi.net.ecommerce.activity.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -10,6 +11,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import vietmobi.net.ecommerce.R;
 import vietmobi.net.ecommerce.activity.AddressesActivity;
@@ -22,6 +29,9 @@ import vietmobi.net.ecommerce.activity.settings.SettingsActivity;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
     CardView cvMyOder, cvAddresses, cvPromoCodes, cvPaymentMethods, cvMyReviews, cvSettings;
+    TextView tvNameUser, tvEmailUser;
+    ImageView imgUser;
+
     Context context;
 
     @Override
@@ -37,6 +47,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         initViews(view);
+        showUserInformation(view);
         addEvents();
         return view;
     }
@@ -57,6 +68,26 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         cvPaymentMethods = view.findViewById(R.id.cvPaymentMethods);
         cvMyReviews = view.findViewById(R.id.cvMyReviews);
         cvSettings = view.findViewById(R.id.cvSettings);
+        tvEmailUser =view.findViewById(R.id.tvEmailUser);
+        tvNameUser =view.findViewById(R.id.tvNameUser);
+        imgUser =view.findViewById(R.id.imgUser);
+
+    }
+
+    private void showUserInformation(View view) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null){
+            return;
+        }
+
+        String name = user.getDisplayName();
+        String email = user.getEmail();
+        Uri photoUrl = user.getPhotoUrl();
+
+        tvNameUser.setText(name);
+        tvEmailUser.setText(email);
+        Glide.with(this).load(photoUrl).error(R.drawable.img).into(imgUser);
+
     }
 
     @Override

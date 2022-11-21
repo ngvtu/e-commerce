@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "903881555878",
+    "project_id": "e-commerce-d49c3",
+    "storage_bucket": "e-commerce-d49c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:903881555878:android:6106f59e1e03693e1e9967",
+        "android_client_info": {
+          "package_name": "vietmobi.net.ecommerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "903881555878-u813oi4vv55ugjg0ikt6ok8239cms7f8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsoPYJ4IojHgPTgXtYVvx5UYv__UCmIac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "903881555878-u813oi4vv55ugjg0ikt6ok8239cms7f8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

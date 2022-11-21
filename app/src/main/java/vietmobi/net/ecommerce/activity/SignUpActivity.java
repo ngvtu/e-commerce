@@ -1,19 +1,31 @@
 package vietmobi.net.ecommerce.activity;
 
+import static android.content.ContentValues.TAG;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,11 +34,13 @@ import vietmobi.net.ecommerce.activity.main.MainActivity;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private static final String PASS = "123";
-    Button btnSignUp;
-    TextInputLayout layout_name, layout_email, layout_password;
-    TextInputEditText edtName, edtEmail, edtPassword;
+    protected FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+
+    TextView btnSignUp;
+    TextInputLayout layout_name, layout_email, layout_password, layout_confirm_password;
+    TextInputEditText edtName, edtEmail, edtPassword, edtConfirmPassword;
     ImageView btnGotoLogin, btnLoginGg, btnLoginFb, btnBack;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +71,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         btnLoginGg = findViewById(R.id.btnLoginGg);
         btnLoginFb = findViewById(R.id.btnLoginFb);
         btnBack = findViewById(R.id.btnBack);
+        layout_confirm_password = findViewById(R.id.layout_confirm_password);
+        edtConfirmPassword = findViewById(R.id.edtConfirmPassword);
+
+        progressDialog = new ProgressDialog(this);
     }
 
     @Override
@@ -103,16 +121,43 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void signUp() {
-//        validateName(edtName);
-//        validateEmailAddress(edtEmail);
-//        validatePassword(edtPassword);
+        validateName(edtName);
+        validateEmailAddress(edtEmail);
+        validatePassword(edtPassword, edtConfirmPassword);
 
-//        if (validateName(edtName) && validateEmailAddress(edtEmail) && validatePassword(edtPassword)){
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            finish();
-//        }
+        if (validateName(edtName) && validateEmailAddress(edtEmail) && validatePassword(edtPassword, edtConfirmPassword)){
+//            Intent intent = new Intent(this, MainActivity.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            startActivity(intent);
+//            finish();
+
+            String email = Objects.requireNonNull(edtEmail.getText()).toString().trim();
+            String password = Objects.requireNonNull(edtPassword.getText()).toString().trim();
+
+            progressDialog.setTitle("Registering, please wait.");
+            progressDialog.show();
+            mFirebaseAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                progressDialog.dismiss();
+                                // Sign in success, update UI with the signed-in user's information
+                                Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                Toast.makeText(SignUpActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+//                                updateUI(null);
+                            }
+                        }
+                    });
+        }
+
+
     }
 
     private boolean validateEmailAddress(EditText email){
@@ -151,19 +196,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    private boolean validatePassword(EditText password) {
+    private boolean validatePassword(EditText password, EditText passwordCf) {
         String pass = password.getText().toString();
-        if (!pass.isEmpty() && pass.equals(PASS)) {
+        String passConfirm = passwordCf.getText().toString();
+        if (!pass.isEmpty() && pass.equals(passConfirm)) {
             layout_password.setError("");
             layout_password.setEndIconDrawable(R.drawable.ic_tick);
             return true;
-        }
-        if (!pass.equals(PASS)) {
-            layout_password.setError("Password not match");
-            edtPassword.requestFocus();
-            return false;
         } else {
-            layout_password.setError("Password not null");
+            layout_password.setError("Repeat password is incorrect");
             edtPassword.requestFocus();
             return false;
         }

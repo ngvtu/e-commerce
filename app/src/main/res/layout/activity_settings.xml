@@ -238,4 +238,16 @@
         android:minHeight="20dp"
         android:text=""
         android:theme="@style/SCBSwitch" />
+
+    <TextView
+        android:id="@+id/btnSignOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="650dp"
+        android:fontFamily="@font/metropolis_semi_bold"
+        android:text="Sign out"
+        android:textColor="@color/red_app"
+        android:textSize="16sp" />
 </RelativeLayout>

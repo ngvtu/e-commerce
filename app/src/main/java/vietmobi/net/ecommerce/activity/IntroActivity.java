@@ -4,10 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import vietmobi.net.ecommerce.R;
+import vietmobi.net.ecommerce.activity.main.MainActivity;
 
 public class IntroActivity extends AppCompatActivity implements View.OnClickListener {
     Button btnGotoLogin, btnGotoSignUp;
@@ -24,6 +29,23 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
     private void addEvents() {
         btnGotoLogin.setOnClickListener(this);
         btnGotoSignUp.setOnClickListener(this);
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                nextActivity();
+            }
+        }, 3000);
+    }
+
+    private void nextActivity() {
+        FirebaseUser user =  FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     private void initViews() {

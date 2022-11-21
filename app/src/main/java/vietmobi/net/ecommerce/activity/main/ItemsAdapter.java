@@ -30,20 +30,19 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
-        View view = LayoutInflater.from(context).inflate(R.layout.line_item_list_in_home, parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.line_item_new_list_in_home, parent,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Items items = listItems.get(position);
-        holder.imvItem.setImageResource(R.drawable.img);
+        holder.imvItem.setImageResource(items.getImgItems());
         holder.tvNameItem.setText(items.getItemName());
         holder.tvBranchName.setText(items.getOfBranch());
         holder.tvPrice.setText(String.valueOf(items.getPrice()));
-        holder.tvIsNew.setText(items.getItemName());
-        holder.tvNameItem.setText(items.getItemName());
-        holder.tvNameItem.setText(items.getItemName());
+        holder.tvOldPrice.setText(String.valueOf(items.getOldPrice()));
+        holder.tvNewPrice.setText(String.valueOf(items.getNewPrice()));
     }
 
     @Override
@@ -54,8 +53,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView imvItem, btnAddFavorite;
         TextView tvBranchName,tvNameItem, tvPrice, tvIsNew, tvOldPrice, tvNewPrice, tvIsSale ;
-
-
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
