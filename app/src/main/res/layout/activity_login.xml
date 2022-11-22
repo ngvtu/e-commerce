@@ -174,6 +174,8 @@
         android:background="@drawable/bg_border_red"
         android:fontFamily="@font/metropolis_medium"
         android:text="LOGIN"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
         android:elevation="10dp"
         android:textColor="@color/white"
         android:gravity="center"

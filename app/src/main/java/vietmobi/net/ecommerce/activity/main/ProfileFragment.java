@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -25,7 +24,7 @@ import vietmobi.net.ecommerce.activity.oder.MyOrdersActivity;
 import vietmobi.net.ecommerce.activity.MyReviewsActivity;
 import vietmobi.net.ecommerce.activity.PaymentActivity;
 import vietmobi.net.ecommerce.activity.PromoCodesActivity;
-import vietmobi.net.ecommerce.activity.settings.SettingsActivity;
+import vietmobi.net.ecommerce.activity.SettingsActivity;
 
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
@@ -88,7 +87,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         tvNameUser.setText(name);
         tvEmailUser.setText(email);
         Glide.with(this).load(photoUrl).error(R.drawable.img).into(imgUser);
-
     }
 
     @Override

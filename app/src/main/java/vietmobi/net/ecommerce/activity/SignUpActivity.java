@@ -3,11 +3,14 @@ package vietmobi.net.ecommerce.activity;
 import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -17,6 +20,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.identity.BeginSignInRequest;
+import com.google.android.gms.auth.api.identity.SignInClient;
+import com.google.android.gms.auth.api.identity.SignInCredential;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -35,6 +46,8 @@ import vietmobi.net.ecommerce.activity.main.MainActivity;
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
     protected FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+    private static final int REQ_ONE_TAP = 2;  // Can be any integer unique to the Activity.
+    private boolean showOneTapUI = true;
 
     TextView btnSignUp;
     TextInputLayout layout_name, layout_email, layout_password, layout_confirm_password;
@@ -57,14 +70,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         btnLoginGg.setOnClickListener(this);
         btnLoginFb.setOnClickListener(this);
         btnBack.setOnClickListener(this);
+
+
     }
 
     private void initViews() {
         btnSignUp = findViewById(R.id.btnSignUp);
-        layout_name = findViewById(R.id.layout_name);
         layout_password = findViewById(R.id.layout_password);
         layout_email = findViewById(R.id.layout_email);
-        edtName = findViewById(R.id.edtName);
         edtEmail = findViewById(R.id.edtEmail);
         edtPassword = findViewById(R.id.edtPassword);
         btnGotoLogin = findViewById(R.id.btnGotoLogin);
@@ -98,6 +111,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     private void backToExit() {
         Intent intent = new Intent(this, IntroActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -107,7 +125,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private void loginGg() {
         Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
+
     }
+
 
     private void loginFb() {
         Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
@@ -125,14 +145,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         validateEmailAddress(edtEmail);
         validatePassword(edtPassword, edtConfirmPassword);
 
-        if (validateName(edtName) && validateEmailAddress(edtEmail) && validatePassword(edtPassword, edtConfirmPassword)){
-//            Intent intent = new Intent(this, MainActivity.class);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            startActivity(intent);
-//            finish();
+        if (validateName(edtName) && validateEmailAddress(edtEmail) && validatePassword(edtPassword, edtConfirmPassword)) {
 
             String email = Objects.requireNonNull(edtEmail.getText()).toString().trim();
             String password = Objects.requireNonNull(edtPassword.getText()).toString().trim();
+            String name = edtName.getText().toString().trim();
+
 
             progressDialog.setTitle("Registering, please wait.");
             progressDialog.show();
@@ -157,35 +175,36 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     });
         }
 
-
     }
 
-    private boolean validateEmailAddress(EditText email){
+    private boolean validateEmailAddress(EditText email) {
         String emailInput = email.getText().toString();
-        if (!emailInput.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()){
+        if (!emailInput.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
             layout_email.setError("");
             layout_email.setEndIconDrawable(R.drawable.ic_tick);
             return true;
-        } if (emailInput.isEmpty()){
+        }
+        if (emailInput.isEmpty()) {
             layout_email.setError("This field is required!");
             edtEmail.requestFocus();
             return false;
-        } else{
+        } else {
             layout_email.setError("Not the format of the email");
             edtEmail.requestFocus();
             return false;
         }
     }
 
-    private boolean validateName(EditText edtName){
+    private boolean validateName(EditText edtName) {
         String name = edtName.getText().toString();
         Pattern pattern = Pattern.compile(new String("^[a-zA-Z\\s]*$"));
         Matcher matcher = pattern.matcher(name);
-        if (name.isEmpty()){
+        if (name.isEmpty()) {
             layout_name.setError("This field is required");
             edtName.requestFocus();
             return false;
-        } if (matcher.find()){
+        }
+        if (matcher.find()) {
             layout_name.setError("");
             layout_name.setEndIconDrawable(R.drawable.ic_tick);
             return true;
@@ -197,11 +216,32 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private boolean validatePassword(EditText password, EditText passwordCf) {
-        String pass = password.getText().toString();
-        String passConfirm = passwordCf.getText().toString();
-        if (!pass.isEmpty() && pass.equals(passConfirm)) {
+        String pass = password.getText().toString().trim();
+        String passConfirm = passwordCf.getText().toString().trim();
+
+        if (pass.length() < 6) {
+            layout_password.setError("Your password must have at least 6 characters.");
+            edtPassword.requestFocus();
+            return false;
+        }
+
+        if (pass.length() >= 6 && pass.equals(passConfirm)) {
             layout_password.setError("");
             layout_password.setEndIconDrawable(R.drawable.ic_tick);
+
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            if (user == null) {
+                return false;
+            }
+            user.updatePassword(pass)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Log.d(TAG, "User password updated.");
+                            }
+                        }
+                    });
             return true;
         } else {
             layout_password.setError("Repeat password is incorrect");

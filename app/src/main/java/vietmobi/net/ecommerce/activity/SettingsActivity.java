@@ -1,4 +1,4 @@
-package vietmobi.net.ecommerce.activity.settings;
+package vietmobi.net.ecommerce.activity;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -16,6 +17,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Patterns;
 import android.view.Gravity;
@@ -24,6 +26,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,13 +46,13 @@ import java.util.regex.Pattern;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import vietmobi.net.ecommerce.R;
-import vietmobi.net.ecommerce.activity.IntroActivity;
-import vietmobi.net.ecommerce.activity.main.MainActivity;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int MY_REQUEST_CODE = 1;
     ImageView btnBack;
     CircleImageView imgUser;
+    private SharedPreferences loginPreferences;
+    private SharedPreferences.Editor loginPrefsEditor;
     Switch switch1, switch2, switch3;
     TextInputLayout layout_change_name, layout_change_email;
     TextView btnSaveInfo, tvFullName, tvEmailUser, btnChangePass, btnSignOut;
@@ -154,8 +157,44 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         TextInputEditText edtOldPassword = dialog.findViewById(R.id.edtOldPassword);
         TextInputEditText edtNewPassword = dialog.findViewById(R.id.edtNewPassword);
         TextInputEditText edtConfirmPassword = dialog.findViewById(R.id.edtConfirmPassword);
+        TextView btnSavePass = dialog.findViewById(R.id.btnSavePass);
+        LinearLayout gotoForgot = dialog.findViewById(R.id.gotoForgot);
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            return;
+        }
 
+        btnSavePass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                validatePassword(edtOldPassword, edtNewPassword, edtConfirmPassword, layout_old_password, layout_new_password, layout_confirm_password);
+                String newPassword = edtNewPassword.getText().toString().trim();
+
+                if (validatePassword(edtOldPassword, edtNewPassword, edtConfirmPassword, layout_old_password, layout_new_password, layout_confirm_password)) {
+                    user.updatePassword(newPassword)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(SettingsActivity.this, "User password updated!", Toast.LENGTH_SHORT).show();
+                                        dialog.dismiss();
+                                    }
+                                }
+                            });
+
+                }
+            }
+        });
+
+        gotoForgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SettingsActivity.this, ForgotPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
 
         dialog.show();
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -299,16 +338,36 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    private boolean validatePassword(EditText password, EditText passwordCf, TextInputLayout layout_old_password,TextInputLayout layout_new_password, TextInputLayout layout_confirm_password ) {
-        String pass = password.getText().toString();
-        String passConfirm = passwordCf.getText().toString();
-        if (!pass.isEmpty() && pass.equals(passConfirm)) {
+    private boolean validatePassword(EditText edtOldPassword, EditText edtNewPassword, EditText edtPasswordCf, TextInputLayout layout_old_password, TextInputLayout layout_new_password, TextInputLayout layout_confirm_password) {
+
+        loginPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+        loginPrefsEditor = loginPreferences.edit();
+
+        String passwordUser = loginPreferences.getString("passwordUser", "");
+
+        String oldPassword = edtOldPassword.getText().toString().trim();
+        String newPassword = edtNewPassword.getText().toString();
+        String passConfirm = edtPasswordCf.getText().toString();
+        if (!oldPassword.equals(passwordUser)) {
+            layout_old_password.setError("Incorrect password");
+            edtOldPassword.requestFocus();
+            return false;
+        } else if (newPassword.length() > 6 && newPassword.equals(passConfirm) && oldPassword.equals(passwordUser)) {
             layout_old_password.setError("");
+            layout_new_password.setError("");
             layout_old_password.setEndIconDrawable(R.drawable.ic_tick);
             return true;
-        } else {
-            layout_old_password.setError("Repeat password is incorrect");
-            layout_old_password.requestFocus();
+        } else if (newPassword.length() <= 6){
+            layout_old_password.setError("");
+            layout_new_password.setError("Your password must have at least 6 characters.");
+            edtNewPassword.requestFocus();
+            return false;
+        } else if (!newPassword.equals(passConfirm)){
+            layout_new_password.setError("Repeat password is incorrect");
+            edtNewPassword.requestFocus();
+            return false;
+        } else{
             return false;
         }
     }

@@ -1,5 +1,6 @@
 package vietmobi.net.ecommerce.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,8 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
 
 import vietmobi.net.ecommerce.R;
 
@@ -61,15 +65,24 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
     private void sendRequest() {
         validateEmailAddress(edtEmail);
         if (validateEmailAddress(edtEmail)){
-            Toast.makeText(this, "Send em", Toast.LENGTH_SHORT).show();
+
+            FirebaseAuth auth = FirebaseAuth.getInstance();
+            String emailAddress = edtEmail.getText().toString().trim();
+
+            auth.sendPasswordResetEmail(emailAddress)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(ForgotPasswordActivity.this, "Check your email", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
         }
     }
 
     private void backToSignUp() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        finish();
+        onBackPressed();
     }
     private boolean validateEmailAddress(EditText email){
         String emailInput = email.getText().toString();

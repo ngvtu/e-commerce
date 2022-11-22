@@ -36,45 +36,13 @@
         app:srcCompat="@drawable/ic_back" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layout_name"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="100dp"
-        android:hint="Name"
-        app:boxBackgroundColor="@color/white"
-        app:boxCornerRadiusBottomEnd="10dp"
-        app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
-        app:boxCornerRadiusTopStart="10dp"
-        app:endIconCheckable="true"
-        app:endIconMode="custom"
-        app:endIconTint="@color/success"
-        app:helperTextTextColor="@android:color/holo_red_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.525"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBack"
-        app:startIconDrawable="@drawable/ic_person_text">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtName"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:fontFamily="@font/metropolis_medium"
-            android:inputType="textPersonName" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout_email"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="100dp"
         android:hint="Email"
         app:boxBackgroundColor="@color/white"
         app:boxCornerRadiusBottomEnd="10dp"
@@ -86,7 +54,7 @@
         app:helperTextTextColor="#9A5E5E"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_name"
+        app:layout_constraintTop_toBottomOf="@+id/btnBack"
         app:startIconDrawable="@drawable/ic_email">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -127,6 +95,7 @@
 
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout_confirm_password"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -160,8 +129,8 @@
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginTop="5dp"
+        android:orientation="horizontal"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_confirm_password">
@@ -191,6 +160,8 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
         android:background="@drawable/bg_border_red"
         android:elevation="10dp"
         android:fontFamily="@font/metropolis_medium"

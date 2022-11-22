@@ -32,8 +32,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
 
     private SharedPreferences loginPreferences;
-    String email, password;
     private SharedPreferences.Editor loginPrefsEditor;
+    String email, password;
     private Boolean saveLogin;
     private CheckBox cbxRemember;
     private TextView btnGotoSignUp, btnLogin;
@@ -133,14 +133,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-        finish();
     }
 
     private void login() {
-        email = edtEmail.getText().toString();
-        password = edtPassword.getText().toString();
+        email = edtEmail.getText().toString().trim();
+        password = edtPassword.getText().toString().trim();
 
-        if (cbxRemember.isChecked()){
+        loginPrefsEditor.putString("passwordUser", password).commit();
+
+        if (cbxRemember.isChecked()) {
             loginPrefsEditor.putBoolean("saveLogin", true)
                     .putString("email", email)
                     .putString("password", password)
@@ -191,8 +192,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             layout_password.setError("");
             layout_password.setEndIconDrawable(R.drawable.ic_tick);
             return true;
-        }
-        else {
+        } else {
             layout_password.setError("Password not null");
             edtPassword.requestFocus();
             return false;
