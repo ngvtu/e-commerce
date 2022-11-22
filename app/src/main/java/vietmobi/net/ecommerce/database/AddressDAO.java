@@ -1,4 +1,4 @@
-package vietmobi.net.ecommerce.activity.database;
+package vietmobi.net.ecommerce.database;
 
 import androidx.room.Dao;
 import androidx.room.Delete;

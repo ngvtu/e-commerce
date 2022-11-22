@@ -14,7 +14,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.Objects;
 
 import vietmobi.net.ecommerce.R;
-import vietmobi.net.ecommerce.activity.database.AddressDatabase;
+import vietmobi.net.ecommerce.database.AddressDatabase;
 import vietmobi.net.ecommerce.models.Address;
 
 public class AddAddressActivity extends AppCompatActivity implements View.OnClickListener {
@@ -68,15 +68,15 @@ public class AddAddressActivity extends AppCompatActivity implements View.OnClic
 
     private void addAddress() {
         String name = edtName.getText().toString().trim();
-        String address = edtAddress.getText().toString().trim();
-        String district = edtDistrict.getText().toString().trim();
+        String address = Objects.requireNonNull(edtAddress.getText()).toString().trim();
+        String district = Objects.requireNonNull(edtDistrict.getText()).toString().trim();
         String city = edtCity.getText().toString().trim();
         String phone = edtPhone.getText().toString().trim();
 
         Address addressNew = new Address(name, address, district, city, phone, false);
         AddressDatabase.getInstance(this).AddressDAO().insertAddress(addressNew);
 
-        Toast.makeText(this, "Add Note successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Add Address successfully", Toast.LENGTH_SHORT).show();
         onBackPressed();
     }
 }
