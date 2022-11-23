@@ -30,8 +30,6 @@ public class Address implements Serializable {
         this.isSelected = isSelected;
     }
 
-    public Address(String name, String address, String district, String city, String phone, boolean b) {
-    }
 
     public int getId() {
         return id;

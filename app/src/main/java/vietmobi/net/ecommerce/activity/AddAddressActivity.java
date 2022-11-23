@@ -2,6 +2,7 @@ package vietmobi.net.ecommerce.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,9 +21,10 @@ import vietmobi.net.ecommerce.models.Address;
 public class AddAddressActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageView btnBack;
-    TextView btnSaveAddress;
-    TextInputEditText edtName, edtAddress, edtDistrict, edtPhone, edtCity;
-    TextInputLayout layout_name, layout_address, layout_district, layout_city, layout_phone;
+    TextView btnSaveAddress, btnUpdateAddress;
+    TextInputEditText edtName, edtAddress, edtDistrict, edtPhone, edtCity, edtCountry;
+    TextInputLayout layout_name, layout_address, layout_district, layout_city, layout_phone, layout_country;
+    Address address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,21 @@ public class AddAddressActivity extends AppCompatActivity implements View.OnClic
     private void addEvents() {
         btnBack.setOnClickListener(this);
         btnSaveAddress.setOnClickListener(this);
+        btnUpdateAddress.setOnClickListener(this);
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle == null) {
+            return;
+        }
+        address = (Address) bundle.get("Address");
+        edtName.setText(address.getFullName());
+        edtAddress.setText(address.getAddress());
+        edtDistrict.setText(address.getDistrict());
+        edtCity.setText(address.getProvince());
+        edtCountry.setText(address.getCountry());
+        edtPhone.setText(address.getNumberPhone());
+        btnUpdateAddress.setVisibility(View.VISIBLE);
+        btnSaveAddress.setVisibility(View.GONE);
     }
 
     private void initViews() {
@@ -46,11 +63,14 @@ public class AddAddressActivity extends AppCompatActivity implements View.OnClic
         edtDistrict = findViewById(R.id.edtDistrict);
         edtPhone = findViewById(R.id.edtPhone);
         edtCity = findViewById(R.id.edtCity);
+        btnUpdateAddress = findViewById(R.id.btnUpdateAddress);
+        edtCountry = findViewById(R.id.edtCountry);
         layout_name = findViewById(R.id.layout_name);
         layout_address = findViewById(R.id.layout_address);
         layout_district = findViewById(R.id.layout_district);
         layout_city = findViewById(R.id.layout_city);
         layout_phone = findViewById(R.id.layout_phone);
+        layout_country = findViewById(R.id.layout_country);
     }
 
     @Override
@@ -62,19 +82,43 @@ public class AddAddressActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.btnSaveAddress:
                 addAddress();
+                Intent intent = new Intent(this, AddressesActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.btnUpdateAddress:
+                updateAddress();
+                Toast.makeText(this, "Update", Toast.LENGTH_SHORT).show();
+                onBackPressed();
+                finish();
                 break;
         }
     }
 
     private void addAddress() {
         String name = edtName.getText().toString().trim();
-        String address = Objects.requireNonNull(edtAddress.getText()).toString().trim();
-        String district = Objects.requireNonNull(edtDistrict.getText()).toString().trim();
+        String address = edtAddress.getText().toString().trim();
+        String district = edtDistrict.getText().toString().trim();
         String city = edtCity.getText().toString().trim();
         String phone = edtPhone.getText().toString().trim();
+        String country = edtCountry.getText().toString().trim();
 
-        Address addressNew = new Address(name, address, district, city, phone, false);
-        AddressDatabase.getInstance(this).AddressDAO().insertAddress(addressNew);
+        Address mAddress = new Address(name, address, district, city, country, phone, false);
+        AddressDatabase.getInstance(this).AddressDAO().insertAddress(mAddress);
+
+        Toast.makeText(this, "Add Address successfully", Toast.LENGTH_SHORT).show();
+        onBackPressed();
+    }
+
+    private void updateAddress() {
+        address.setFullName(edtName.getText().toString().trim());
+        address.setAddress(edtAddress.getText().toString().trim());
+        address.setDistrict(edtDistrict.getText().toString().trim());
+        address.setProvince(edtCity.getText().toString().trim());
+        address.setNumberPhone(edtPhone.getText().toString().trim());
+        address.setCountry(edtCountry.getText().toString().trim());
+
+        AddressDatabase.getInstance(this).AddressDAO().updateAddress(address);
 
         Toast.makeText(this, "Add Address successfully", Toast.LENGTH_SHORT).show();
         onBackPressed();

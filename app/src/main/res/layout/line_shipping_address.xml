@@ -20,6 +20,18 @@
         android:textSize="16sp" />
 
     <TextView
+        android:id="@+id/tvDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="90dp"
+        android:fontFamily="@font/metropolis_medium"
+        android:text="Delete"
+        android:textColor="@color/red_app"
+        android:textSize="16sp" />
+
+    <TextView
         android:id="@+id/tvNameUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,9 +59,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
-        android:layout_toEndOf="@+id/textView3"
+        android:layout_toStartOf="@+id/tvPhoneNumber"
         android:fontFamily="@font/metropolis_medium"
         android:text="+84"
         android:textColor="@color/black"
@@ -60,9 +71,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="60dp"
         android:layout_marginTop="30dp"
-        android:layout_toEndOf="@+id/tvPlace"
+        android:layout_marginEnd="11dp"
+        android:layout_toStartOf="@+id/textView2"
         android:fontFamily="@font/metropolis_medium"
         android:text="Phone: "
         android:textColor="@color/black"
@@ -73,8 +84,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="30dp"
-        android:layout_toEndOf="@+id/textView2"
         android:fontFamily="@font/metropolis_medium"
         android:text="372021711"
         android:textColor="@color/black"
@@ -105,6 +116,30 @@
         android:textSize="16sp" />
 
     <TextView
+        android:id="@+id/tvCountry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="60dp"
+        android:layout_toEndOf="@+id/textView4"
+        android:fontFamily="@font/metropolis_medium"
+        android:text="Country"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="60dp"
+        android:layout_toEndOf="@+id/tvCity"
+        android:fontFamily="@font/metropolis_medium"
+        android:text=" - "
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
         android:id="@+id/tvCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -117,15 +152,15 @@
         android:textSize="16sp" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/cbxUse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:layout_marginTop="90dp"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="90dp"
         android:fontFamily="@font/metropolis_light"
-        android:text="Use as the shipping address" />
+        android:text="Use as the shipping address"
+        android:textColor="@color/black" />
 
 
 </RelativeLayout>

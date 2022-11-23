@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 
 import vietmobi.net.ecommerce.models.Address;
 
-@Database(entities = {Address.class}, version = 1)
+@Database(entities = {Address.class}, version = 2)
 public abstract class AddressDatabase extends RoomDatabase {
     public static final String DATABASE_NAME = "address.db";
     private static AddressDatabase instance;

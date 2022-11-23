@@ -1,5 +1,7 @@
 package vietmobi.net.ecommerce.activity.main;
 
+import static java.lang.String.valueOf;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -25,11 +27,12 @@ import vietmobi.net.ecommerce.activity.MyReviewsActivity;
 import vietmobi.net.ecommerce.activity.PaymentActivity;
 import vietmobi.net.ecommerce.activity.PromoCodesActivity;
 import vietmobi.net.ecommerce.activity.SettingsActivity;
+import vietmobi.net.ecommerce.database.AddressDatabase;
 
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
     CardView cvMyOder, cvAddresses, cvPromoCodes, cvPaymentMethods, cvMyReviews, cvSettings;
-    TextView tvNameUser, tvEmailUser;
+    TextView tvNameUser, tvEmailUser, tvCountAddresses;
     CircleImageView imgUser;
 
     Context context;
@@ -71,6 +74,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         tvEmailUser =view.findViewById(R.id.tvEmailUser);
         tvNameUser =view.findViewById(R.id.tvNameUser);
         imgUser =view.findViewById(R.id.imgUser);
+        tvCountAddresses =view.findViewById(R.id.tvCountAddresses);
+
+        String countAddress =  valueOf( AddressDatabase.getInstance(getContext()).AddressDAO().getCountAddress());
+
+        tvCountAddresses.setText(countAddress);
 
     }
 

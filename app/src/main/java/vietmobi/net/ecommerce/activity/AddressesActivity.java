@@ -1,6 +1,7 @@
 package vietmobi.net.ecommerce.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -10,13 +11,21 @@ import android.widget.ImageView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import vietmobi.net.ecommerce.R;
+import vietmobi.net.ecommerce.adapter.AddressesAdapter;
+import vietmobi.net.ecommerce.database.AddressDatabase;
+import vietmobi.net.ecommerce.models.Address;
 
 public class AddressesActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageView btnBack;
     FloatingActionButton btnAddAddress;
     RecyclerView rcvListAddress;
+    AddressesAdapter addressesAdapter;
+    List<Address> listAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +33,19 @@ public class AddressesActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_addresses);
 
         initViews();
+        addListAddress();
         addEvents();
+    }
+
+    private void addListAddress() {
+        listAddress = new ArrayList<>();
+        listAddress = AddressDatabase.getInstance(this).AddressDAO().getListAddress();
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        addressesAdapter = new AddressesAdapter(listAddress, this);
+        rcvListAddress.setAdapter(addressesAdapter);
+        rcvListAddress.setLayoutManager(linearLayoutManager);
+
     }
 
     private void addEvents() {

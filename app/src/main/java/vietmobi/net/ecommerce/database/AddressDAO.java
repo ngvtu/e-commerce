@@ -21,9 +21,12 @@ public interface AddressDAO {
     @Query("select * from all_address where id = :id")
     Address getAddress(int id);
 
+    @Query("select count(id) from all_address")
+    int getCountAddress();
+
     @Update
-    void updateNote(Address address);
+    void updateAddress(Address address);
 
     @Delete
-    void deleteNote(Address address);
+    void deleteAddress(Address address);
 }
