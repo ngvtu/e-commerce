@@ -11,11 +11,20 @@ public class Card {
     String cardName;
     String expiryDate;
     String numberCard;
-    public int CVV;
+    public String CVV;
+
+    public String getCVV() {
+        return CVV;
+    }
+
+    public void setCVV(String CVV) {
+        this.CVV = CVV;
+    }
+
     boolean isMasterCard;
     boolean isVisa;
 
-    public Card(String cardName, String expiryDate, String numberCard, int CVV, boolean isMasterCard, boolean isVisa) {
+    public Card(String cardName, String expiryDate, String numberCard, String CVV, boolean isMasterCard, boolean isVisa) {
         this.cardName = cardName;
         this.expiryDate = expiryDate;
         this.numberCard = numberCard;

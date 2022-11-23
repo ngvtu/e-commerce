@@ -39,6 +39,7 @@ public class AddressesActivity extends AppCompatActivity implements View.OnClick
 
     private void addListAddress() {
         listAddress = new ArrayList<>();
+
         listAddress = AddressDatabase.getInstance(this).AddressDAO().getListAddress();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
