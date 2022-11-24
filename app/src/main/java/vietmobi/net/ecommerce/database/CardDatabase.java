@@ -8,9 +8,9 @@ import androidx.room.RoomDatabase;
 
 import vietmobi.net.ecommerce.models.Card;
 
-@Database(entities = {Card.class}, version = 2)
+@Database(entities = {Card.class}, version = 1)
 public abstract class CardDatabase extends RoomDatabase {
-    public static final String DATABASE_NAME = "address.db";
+    public static final String DATABASE_NAME = "card.db";
     private static CardDatabase instance;
 
     public static synchronized CardDatabase getInstance(Context context) {

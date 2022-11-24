@@ -11,9 +11,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.reflect.Array;
 import java.util.List;
 
 import vietmobi.net.ecommerce.R;
+import vietmobi.net.ecommerce.database.AddressDatabase;
+import vietmobi.net.ecommerce.database.CardDatabase;
 import vietmobi.net.ecommerce.models.Card;
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder>{
@@ -49,10 +52,10 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder>{
         holder.tvCardName.setText(card.getCardName());
         holder.tvExpiryDate.setText(card.getExpiryDate());
 
-        char [] data = card.getNumberCard().toCharArray();
-        String text4CardNumber = String.copyValueOf(data, 12, 4);
+//        char [] data = card.getNumberCard().toCharArray();
+//        String text4CardNumber = String.copyValueOf(data, 12, 4);
 
-        holder.tv4Number.setText(text4CardNumber);
+        holder.tv4Number.setText(card.getNumberCard());
 
         if (card.isMasterCard() == true){
             holder.imgMasterCard.setVisibility(View.VISIBLE);
@@ -65,7 +68,10 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder>{
         holder.tvDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                CardDatabase.getInstance(view.getContext()).cardDAO().deleteCard(card);
+                listCard = CardDatabase.getInstance(context).cardDAO().getListCard();
+                setData(listCard);
+                notifyDataSetChanged();
             }
         });
 

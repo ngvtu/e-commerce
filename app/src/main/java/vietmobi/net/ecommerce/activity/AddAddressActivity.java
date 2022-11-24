@@ -1,7 +1,11 @@
 package vietmobi.net.ecommerce.activity;
 
+import static vietmobi.net.ecommerce.activity.main.ProfileFragment.MY_REQUEST_CODE_3;
+import static vietmobi.net.ecommerce.adapter.AddressesAdapter.MY_REQUEST_CODE;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +24,7 @@ import vietmobi.net.ecommerce.models.Address;
 
 public class AddAddressActivity extends AppCompatActivity implements View.OnClickListener {
 
+    public static final int MY_REQUEST_CODE_2 = 9;
     ImageView btnBack;
     TextView btnSaveAddress, btnUpdateAddress;
     TextInputEditText edtName, edtAddress, edtDistrict, edtPhone, edtCity, edtCountry;
@@ -81,16 +86,10 @@ public class AddAddressActivity extends AppCompatActivity implements View.OnClic
                 finish();
                 break;
             case R.id.btnSaveAddress:
-                addAddress();
-                Intent intent = new Intent(this, AddressesActivity.class);
-                startActivity(intent);
-                finish();
+
                 break;
             case R.id.btnUpdateAddress:
                 updateAddress();
-                Toast.makeText(this, "Update", Toast.LENGTH_SHORT).show();
-                onBackPressed();
-                finish();
                 break;
         }
     }
@@ -121,6 +120,8 @@ public class AddAddressActivity extends AppCompatActivity implements View.OnClic
         AddressDatabase.getInstance(this).AddressDAO().updateAddress(address);
 
         Toast.makeText(this, "Add Address successfully", Toast.LENGTH_SHORT).show();
-        onBackPressed();
+
+        setResult(RESULT_OK);
+        finish();
     }
 }

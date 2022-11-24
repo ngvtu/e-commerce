@@ -35,6 +35,7 @@ public class PaymentActivity extends AppCompatActivity {
     RecyclerView rcvListCard;
     FloatingActionButton btnAddCard;
     ImageView btnBack;
+    TextView tvNotification;
 
     List<Card> listCard;
     CardAdapter cardAdapter;
@@ -96,7 +97,7 @@ public class PaymentActivity extends AppCompatActivity {
                         card.setNumberCard(numberCard);
                         card.setExpiryDate(expireCard);
                         card.setCVV(CVV);
-                        if (typeCard.equals("Master Card")){
+                        if (typeCard.equals("Master Card")) {
                             card.setMasterCard(true);
                             card.setVisa(false);
                         } else {
@@ -106,6 +107,10 @@ public class PaymentActivity extends AppCompatActivity {
 
                         CardDatabase.getInstance(v.getContext()).cardDAO().insertCard(card);
                         Toast.makeText(PaymentActivity.this, "Add Card complete", Toast.LENGTH_SHORT).show();
+
+                        listCard = CardDatabase.getInstance(v.getContext()).cardDAO().getListCard();
+
+                        cardAdapter.setData(listCard);
                         dialog.dismiss();
                     }
                 });
@@ -121,10 +126,15 @@ public class PaymentActivity extends AppCompatActivity {
 
     private void addListCard() {
         listCard = new ArrayList<>();
-        if (listCard.isEmpty()){
+
+        tvNotification.setVisibility(View.GONE);
+        listCard = CardDatabase.getInstance(this).cardDAO().getListCard();
+
+        if (listCard.isEmpty()) {
+            tvNotification.setVisibility(View.VISIBLE);
             return;
         }
-        listCard = CardDatabase.getInstance(this).cardDAO().getListCard();
+
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         cardAdapter = new CardAdapter(listCard, this);
@@ -136,5 +146,6 @@ public class PaymentActivity extends AppCompatActivity {
         rcvListCard = findViewById(R.id.rcvListCard);
         btnAddCard = findViewById(R.id.btnAddCard);
         btnBack = findViewById(R.id.btnBack);
+        tvNotification = findViewById(R.id.tvNotification);
     }
 }

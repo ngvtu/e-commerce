@@ -31,6 +31,7 @@ import vietmobi.net.ecommerce.database.AddressDatabase;
 
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
+    public static final int MY_REQUEST_CODE_3 = 1;
     CardView cvMyOder, cvAddresses, cvPromoCodes, cvPaymentMethods, cvMyReviews, cvSettings;
     TextView tvNameUser, tvEmailUser, tvCountAddresses;
     CircleImageView imgUser;
@@ -71,12 +72,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         cvPaymentMethods = view.findViewById(R.id.cvPaymentMethods);
         cvMyReviews = view.findViewById(R.id.cvMyReviews);
         cvSettings = view.findViewById(R.id.cvSettings);
-        tvEmailUser =view.findViewById(R.id.tvEmailUser);
-        tvNameUser =view.findViewById(R.id.tvNameUser);
-        imgUser =view.findViewById(R.id.imgUser);
-        tvCountAddresses =view.findViewById(R.id.tvCountAddresses);
+        tvEmailUser = view.findViewById(R.id.tvEmailUser);
+        tvNameUser = view.findViewById(R.id.tvNameUser);
+        imgUser = view.findViewById(R.id.imgUser);
+        tvCountAddresses = view.findViewById(R.id.tvCountAddresses);
 
-        String countAddress =  valueOf( AddressDatabase.getInstance(getContext()).AddressDAO().getCountAddress());
+        String countAddress = valueOf(AddressDatabase.getInstance(getContext()).AddressDAO().getCountAddress());
 
         tvCountAddresses.setText(countAddress);
 
@@ -84,7 +85,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     private void showUserInformation(View view) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user == null){
+        if (user == null) {
             return;
         }
 
@@ -106,7 +107,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.cvAddresses:
                 Intent intent2 = new Intent(getContext(), AddressesActivity.class);
-                startActivity(intent2);
+                startActivityForResult(intent2, MY_REQUEST_CODE_3);
                 break;
             case R.id.cvPromoCodes:
                 Intent intent3 = new Intent(getContext(), PromoCodesActivity.class);

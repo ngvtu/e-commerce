@@ -48,4 +48,18 @@
         android:layout_below="@+id/textView22"
         android:layout_marginTop="20dp" />
 
+    <TextView
+        android:id="@+id/tvNotification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="250dp"
+        android:visibility="gone"
+        android:fontFamily="@font/metropolis_semi_bold"
+        android:gravity="center"
+        android:text="Oop! Use haven't method payment. \nPlease add a card"
+        android:textColor="@color/black"
+        android:textSize="18dp" />
+
 </RelativeLayout>
