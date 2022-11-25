@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/color_back_ground"
     android:padding="14dp"
-    tools:context=".activity.AddAddressActivity">
+    tools:context=".activity.AddPromoCodeActivity">
 
     <ImageView
         android:id="@+id/btnBack"
@@ -25,19 +25,19 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="50dp"
         android:fontFamily="@font/metropolis_extra_bold"
-        android:text="Adding Addresses"
+        android:text="Adding Promo Code"
         android:textColor="@color/black"
         android:textSize="34sp" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layout_name"
+        android:id="@+id/layout_name_promo"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="130dp"
-        android:hint="Full name"
+        android:hint="Name Promo Code"
         app:boxBackgroundColor="@color/white"
         app:boxCornerRadiusBottomEnd="10dp"
         app:boxCornerRadiusBottomStart="10dp"
@@ -46,11 +46,10 @@
         app:helperText="*"
         app:helperTextTextColor="@android:color/holo_red_light"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:startIconDrawable="@drawable/ic_person">
+        app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtName"
+            android:id="@+id/edtCodeName"
             android:layout_width="match_parent"
             android:layout_height="58dp"
             android:fontFamily="@font/metropolis_medium"
@@ -59,14 +58,14 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layout_address"
+        android:id="@+id/layout_promo_value"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="220dp"
-        android:hint="Address - Commune"
+        android:hint="Promo Value"
         app:boxBackgroundColor="@color/white"
         app:boxCornerRadiusBottomEnd="10dp"
         app:boxCornerRadiusBottomStart="10dp"
@@ -75,26 +74,26 @@
         app:helperText="*"
         app:helperTextTextColor="@android:color/holo_red_light"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:startIconDrawable="@drawable/ic_place">
+        app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtAddress"
+            android:id="@+id/edtValuePromo"
+            android:maxLength="2"
             android:layout_width="match_parent"
             android:layout_height="58dp"
             android:fontFamily="@font/metropolis_medium"
-            android:inputType="text" />
+            android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layout_district"
+        android:id="@+id/layout_code"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="310dp"
-        android:hint="District"
+        android:hint="Code"
         app:boxBackgroundColor="@color/white"
         app:boxCornerRadiusBottomEnd="10dp"
         app:boxCornerRadiusBottomStart="10dp"
@@ -103,11 +102,10 @@
         app:helperText="*"
         app:helperTextTextColor="@android:color/holo_red_light"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:startIconDrawable="@drawable/ic_house">
+        app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtDistrict"
+            android:id="@+id/edtCode"
             android:layout_width="match_parent"
             android:layout_height="58dp"
             android:fontFamily="@font/metropolis_medium"
@@ -115,14 +113,14 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layout_city"
+        android:id="@+id/layout_remaining"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="400dp"
-        android:hint="City"
+        android:hint="Number of effective days"
         app:boxBackgroundColor="@color/white"
         app:boxCornerRadiusBottomEnd="10dp"
         app:boxCornerRadiusBottomStart="10dp"
@@ -131,109 +129,16 @@
         app:helperText="*"
         app:helperTextTextColor="@android:color/holo_red_light"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:startIconDrawable="@drawable/ic_city">
+        app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtCity"
+            android:id="@+id/edtRemainingDay"
             android:layout_width="match_parent"
             android:layout_height="58dp"
+            android:maxLength="2"
             android:fontFamily="@font/metropolis_medium"
-            android:inputType="text" />
+            android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layout_country"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="490dp"
-        android:hint="Country"
-        app:boxBackgroundColor="@color/white"
-        app:boxCornerRadiusBottomEnd="10dp"
-        app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
-        app:boxCornerRadiusTopStart="10dp"
-        app:helperText="*"
-        app:helperTextTextColor="@android:color/holo_red_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:startIconDrawable="@drawable/ic_flag">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtCountry"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:fontFamily="@font/metropolis_medium"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layout_phone"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="580dp"
-        android:hint="Phone"
-        app:boxBackgroundColor="@color/white"
-        app:boxCornerRadiusBottomEnd="10dp"
-        app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
-        app:boxCornerRadiusTopStart="10dp"
-        app:helperText="*"
-        app:helperTextTextColor="@android:color/holo_red_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-
-        app:startIconDrawable="@drawable/ic_phone">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtPhone"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:maxLength="11"
-            android:fontFamily="@font/metropolis_medium"
-            android:inputType="phone" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/btnSaveAddress"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="680dp"
-        android:layout_marginEnd="4dp"
-        android:background="@drawable/bg_border_red"
-        android:elevation="4dp"
-        android:fontFamily="@font/metropolis_medium"
-        android:gravity="center"
-        android:text="SAVE ADDRESS"
-        android:textColor="@color/white"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/btnUpdateAddress"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:visibility="gone"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="680dp"
-        android:layout_marginEnd="4dp"
-        android:background="@drawable/bg_border_red"
-        android:elevation="4dp"
-        android:fontFamily="@font/metropolis_medium"
-        android:gravity="center"
-        android:text="UPDATE ADDRESS"
-        android:textColor="@color/white"
-        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textView40"
@@ -241,9 +146,26 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="655dp"
+        android:layout_marginTop="475dp"
         android:text="* is not null"
         android:textColor="@color/red_app"
         android:textSize="11sp" />
+
+    <TextView
+        android:id="@+id/btnAddPromoCode"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="500dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/bg_border_red"
+        android:elevation="4dp"
+        android:fontFamily="@font/metropolis_medium"
+        android:gravity="center"
+        android:text="ADD PROMO CODE"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 
 </RelativeLayout>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="343dp"
+    android:layout_width="match_parent"
     android:layout_margin="5dp"
     android:layout_height="80dp"
     android:background="@drawable/border_item"
-    android:elevation="10dp">
+    android:elevation="4dp">
 
 
     <ImageView
@@ -15,7 +15,7 @@
         app:srcCompat="@drawable/img_discount" />
 
     <TextView
-        android:id="@+id/tvDiscount"
+        android:id="@+id/tvValuePromo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -31,10 +31,9 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="48dp"
+        android:layout_toEndOf="@+id/tvValuePromo"
         android:layout_marginTop="23dp"
         android:orientation="vertical">
 
@@ -59,7 +58,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tvNameDiscount"
+        android:id="@+id/tvNameCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -87,8 +86,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="237dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
         android:layout_marginTop="12dp"
         android:layout_alignParentTop="true"
         android:orientation="horizontal">
@@ -115,9 +114,9 @@
     <TextView
         android:id="@+id/btnApply"
         android:layout_width="93dp"
-        android:layout_height="36dp"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="236dp"
+        android:layout_height="33dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
         android:layout_marginTop="33dp"
         android:gravity="center"
         android:elevation="15dp"

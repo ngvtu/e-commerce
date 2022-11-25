@@ -2,17 +2,22 @@ package vietmobi.net.ecommerce.activity.main;
 
 import static java.lang.String.valueOf;
 
+import static vietmobi.net.ecommerce.activity.AddAddressActivity.MY_REQUEST_CODE_2;
+import static vietmobi.net.ecommerce.adapter.AddressesAdapter.MY_REQUEST_CODE;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -32,6 +37,7 @@ import vietmobi.net.ecommerce.database.AddressDatabase;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
     public static final int MY_REQUEST_CODE_3 = 1;
+    LinearLayout layout_change_info;
     CardView cvMyOder, cvAddresses, cvPromoCodes, cvPaymentMethods, cvMyReviews, cvSettings;
     TextView tvNameUser, tvEmailUser, tvCountAddresses;
     CircleImageView imgUser;
@@ -63,6 +69,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         cvPaymentMethods.setOnClickListener(this);
         cvMyReviews.setOnClickListener(this);
         cvSettings.setOnClickListener(this);
+        layout_change_info.setOnClickListener(this);
     }
 
     private void initViews(View view) {
@@ -76,6 +83,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         tvNameUser = view.findViewById(R.id.tvNameUser);
         imgUser = view.findViewById(R.id.imgUser);
         tvCountAddresses = view.findViewById(R.id.tvCountAddresses);
+        layout_change_info = view.findViewById(R.id.layout_change_info);
 
         String countAddress = valueOf(AddressDatabase.getInstance(getContext()).AddressDAO().getCountAddress());
 
@@ -99,6 +107,17 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == MY_REQUEST_CODE_2) {
+            String countAddress = valueOf(AddressDatabase.getInstance(getContext()).AddressDAO().getCountAddress());
+
+            tvCountAddresses.setText(countAddress);
+        }
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.cvMyOder:
@@ -107,7 +126,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.cvAddresses:
                 Intent intent2 = new Intent(getContext(), AddressesActivity.class);
-                startActivityForResult(intent2, MY_REQUEST_CODE_3);
+                startActivityForResult(intent2, MY_REQUEST_CODE_2);
                 break;
             case R.id.cvPromoCodes:
                 Intent intent3 = new Intent(getContext(), PromoCodesActivity.class);

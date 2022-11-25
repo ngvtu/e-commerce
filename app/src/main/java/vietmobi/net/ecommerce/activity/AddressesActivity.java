@@ -40,6 +40,7 @@ public class AddressesActivity extends AppCompatActivity {
     FloatingActionButton btnAddAddress;
     RecyclerView rcvListAddress;
     AddressesAdapter addressesAdapter;
+    TextView tvNotification;
     List<Address> listAddress;
     Address address;
 
@@ -59,6 +60,11 @@ public class AddressesActivity extends AppCompatActivity {
 
         listAddress = AddressDatabase.getInstance(this).AddressDAO().getListAddress();
 
+        if (listAddress.isEmpty()) {
+            tvNotification.setVisibility(View.VISIBLE);
+            return;
+        }
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         addressesAdapter = new AddressesAdapter(listAddress, this);
         addressesAdapter.notifyDataSetChanged();
@@ -72,7 +78,7 @@ public class AddressesActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                setResult(RESULT_OK);
                 finish();
             }
         });
@@ -89,8 +95,8 @@ public class AddressesActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
         btnAddAddress = findViewById(R.id.btnAddAddress);
         rcvListAddress = findViewById(R.id.rcvListAddress);
+        tvNotification = findViewById(R.id.tvNotification);
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -153,6 +159,9 @@ public class AddressesActivity extends AppCompatActivity {
 
                 Toast.makeText(view.getContext(), "Add Address successfully", Toast.LENGTH_SHORT).show();
                 listAddress = AddressDatabase.getInstance(view.getContext()).AddressDAO().getListAddress();
+                if (listAddress == null){
+                    return;
+                }
                 addressesAdapter.setData(listAddress);
                 dialog.dismiss();
             }

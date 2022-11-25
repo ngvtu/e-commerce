@@ -1,5 +1,8 @@
 package vietmobi.net.ecommerce.models;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Items {
     public int getImgItems() {
         return imgItems;
@@ -10,11 +13,36 @@ public class Items {
     }
 
     private int id, imgItems;
-    private String itemName, ofBranch, category;
+    private String itemName, ofBranch, category, describe;
     private Float price, oldPrice, newPrice;
     private boolean isSale, isFavorite;
 
-    public Items(int imgItems, String itemName, String ofBranch, String category, Float price, Float oldPrice, Float newPrice, boolean isSale, boolean isFavorite) {
+    public String getDescribe() {
+        return describe;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
+
+    public Map<String, Object > toMap(){
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("id", id);
+        result.put("itemName", itemName);
+        result.put("ofBranch", ofBranch);
+        result.put("category", category);
+        result.put("describe", describe);
+        result.put("price", price);
+        result.put("oldPrice", oldPrice);
+        result.put("newPrice", newPrice);
+        result.put("isSale", isSale);
+        result.put("isFavorite", isFavorite);
+        return result;
+    }
+
+    public Items(int id, int imgItems, String itemName, String describe, String ofBranch, String category, Float price, Float oldPrice, Float newPrice, boolean isSale, boolean isFavorite) {
+        this.id = id;
+        this.describe = describe;
         this.imgItems = imgItems;
         this.itemName = itemName;
         this.ofBranch = ofBranch;
@@ -129,4 +157,6 @@ public class Items {
     public void setFavorite(boolean favorite) {
         isFavorite = favorite;
     }
+
+
 }

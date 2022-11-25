@@ -109,6 +109,9 @@ public class PaymentActivity extends AppCompatActivity {
                         Toast.makeText(PaymentActivity.this, "Add Card complete", Toast.LENGTH_SHORT).show();
 
                         listCard = CardDatabase.getInstance(v.getContext()).cardDAO().getListCard();
+                        if (listCard == null){
+                            return;
+                        }
 
                         cardAdapter.setData(listCard);
                         dialog.dismiss();
@@ -134,7 +137,6 @@ public class PaymentActivity extends AppCompatActivity {
             tvNotification.setVisibility(View.VISIBLE);
             return;
         }
-
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         cardAdapter = new CardAdapter(listCard, this);

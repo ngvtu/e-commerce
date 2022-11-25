@@ -26,6 +26,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:id="@+id/layout_change_info"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"

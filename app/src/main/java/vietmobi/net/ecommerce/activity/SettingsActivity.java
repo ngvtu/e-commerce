@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -140,7 +141,11 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void signOut() {
+        SharedPreferences loginPreferences = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE);
+        loginPreferences.edit().clear().commit();
+
         FirebaseAuth.getInstance().signOut();
+
         Intent intent = new Intent(SettingsActivity.this, IntroActivity.class);
         startActivity(intent);
         finishAffinity();
