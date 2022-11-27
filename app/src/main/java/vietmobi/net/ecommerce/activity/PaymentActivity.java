@@ -12,6 +12,9 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import vietmobi.net.ecommerce.R;
+import vietmobi.net.ecommerce.activity.main.ItemsAdapter;
 import vietmobi.net.ecommerce.adapter.AddressesAdapter;
 import vietmobi.net.ecommerce.adapter.CardAdapter;
 import vietmobi.net.ecommerce.database.AddressDatabase;
@@ -62,6 +66,8 @@ public class PaymentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final android.app.Dialog dialog = new android.app.Dialog(view.getContext());
+                String[] itemsCard = {"Master Card", "VISA"};
+
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.bottom_sheet_add_card);
 
@@ -77,9 +83,16 @@ public class PaymentActivity extends AppCompatActivity {
                 AppCompatAutoCompleteTextView edtTypeCard = dialog.findViewById(R.id.edtTypeCard);
                 TextView btnAddCard = dialog.findViewById(R.id.btnAddCard);
 
-                edtTypeCard.setOnClickListener(new View.OnClickListener() {
+                ArrayAdapter<String> adapterItemsCard;
+                adapterItemsCard = new ArrayAdapter<String>(PaymentActivity.this, R.layout.line_list_type_card, itemsCard);
+
+                edtTypeCard.setAdapter(adapterItemsCard);
+
+                edtTypeCard.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onClick(View v) {
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String item = parent.getItemAtPosition(position).toString();
+                        edtTypeCard.setText(item);
                     }
                 });
 
@@ -100,7 +113,8 @@ public class PaymentActivity extends AppCompatActivity {
                         if (typeCard.equals("Master Card")) {
                             card.setMasterCard(true);
                             card.setVisa(false);
-                        } else {
+                        }
+                        if (typeCard.equals("VISA")) {
                             card.setMasterCard(false);
                             card.setVisa(true);
                         }
@@ -109,7 +123,7 @@ public class PaymentActivity extends AppCompatActivity {
                         Toast.makeText(PaymentActivity.this, "Add Card complete", Toast.LENGTH_SHORT).show();
 
                         listCard = CardDatabase.getInstance(v.getContext()).cardDAO().getListCard();
-                        if (listCard == null){
+                        if (listCard == null) {
                             return;
                         }
 

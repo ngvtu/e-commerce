@@ -7,15 +7,15 @@
     android:backgroundTint="@color/color_back_ground"
     tools:context=".activity.main.MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        app:menu="@menu/menu_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/color_back_ground"
-        android:elevation="0.001dp"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/toolbar"-->
+<!--        app:menu="@menu/menu_item"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@color/color_back_ground"-->
+<!--        android:elevation="0.001dp"-->
+<!--        android:minHeight="?attr/actionBarSize"-->
+<!--        android:theme="?attr/actionBarTheme" />-->
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"

@@ -19,7 +19,7 @@ import vietmobi.net.ecommerce.database.AddressDatabase;
 import vietmobi.net.ecommerce.database.CardDatabase;
 import vietmobi.net.ecommerce.models.Card;
 
-public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder>{
+public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
     List<Card> listCard;
     Context context;
@@ -29,7 +29,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder>{
         this.context = context;
     }
 
-    public void setData(List<Card> listCard){
+    public void setData(List<Card> listCard) {
         this.listCard = listCard;
         notifyDataSetChanged();
     }
@@ -45,24 +45,22 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Card  card = listCard.get(position);
-        if (card == null){
+        Card card = listCard.get(position);
+        if (card == null) {
             return;
         }
         holder.tvCardName.setText(card.getCardName());
         holder.tvExpiryDate.setText(card.getExpiryDate());
 
-//        char [] data = card.getNumberCard().toCharArray();
-//        String text4CardNumber = String.copyValueOf(data, 12, 4);
-
         holder.tv4Number.setText(card.getNumberCard());
 
-        if (card.isMasterCard() == true){
+        if (card.isMasterCard()) {
             holder.imgMasterCard.setVisibility(View.VISIBLE);
             holder.imgVisaCard.setVisibility(View.GONE);
-        } else {
+        }
+        if (card.isVisa()) {
             holder.imgVisaCard.setVisibility(View.VISIBLE);
-            holder.imgVisaCard.setVisibility(View.GONE);
+            holder.imgMasterCard.setVisibility(View.GONE);
         }
 
         holder.tvDelete.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +80,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder>{
         return listCard.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvCardName, tvExpiryDate, tvDelete, tv4Number;
         ImageView imgVisaCard, imgMasterCard;
