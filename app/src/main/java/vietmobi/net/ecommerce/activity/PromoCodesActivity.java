@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -58,17 +59,42 @@ public class PromoCodesActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("list_promo_code");
 
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
-                    PromoCode promoCode = dataSnapshot.getValue(PromoCode.class);
-                    listPromoCode.add(promoCode);
-                }
+        // Cach 1 lang nghe thay doi su kien
+//        myRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if (listPromoCode != null){
+//                    listPromoCode.clear();
+//                }
+//                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+//                    PromoCode promoCode = dataSnapshot.getValue(PromoCode.class);
+//                    listPromoCode.add(promoCode);
+//                }
+//
+//                if (listPromoCode.isEmpty()) {
+//                    tvNotification.setVisibility(View.VISIBLE);
+//                    return;
+//                }
+//
+//                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(PromoCodesActivity.this, LinearLayoutManager.VERTICAL, false);
+//                promoCodeAdapter = new PromoCodeAdapter(listPromoCode, PromoCodesActivity.this);
+//                promoCodeAdapter.notifyDataSetChanged();
+//                rcvListPromoCode.setAdapter(promoCodeAdapter);
+//                rcvListPromoCode.setLayoutManager(linearLayoutManager);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Toast.makeText(PromoCodesActivity.this, "Get list users fail", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
-                if (listPromoCode.isEmpty()) {
-                    tvNotification.setVisibility(View.VISIBLE);
-                    return;
+        myRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                PromoCode promoCode = snapshot.getValue(PromoCode.class);
+                if (promoCode != null){
+                    listPromoCode.add(promoCode);
                 }
 
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(PromoCodesActivity.this, LinearLayoutManager.VERTICAL, false);
@@ -79,14 +105,25 @@ public class PromoCodesActivity extends AppCompatActivity {
             }
 
             @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(PromoCodesActivity.this, "Get list users fail", Toast.LENGTH_SHORT).show();
+
             }
         });
-
-
-
-
 
     }
 
@@ -116,8 +153,6 @@ public class PromoCodesActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-
     }
 
     private void initViews() {
@@ -128,4 +163,6 @@ public class PromoCodesActivity extends AppCompatActivity {
 
         getListPromoFromDatabase();
     }
+
+
 }

@@ -74,7 +74,6 @@ public class AddPromoCodeActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 
     private void initViews() {

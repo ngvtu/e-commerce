@@ -21,11 +21,14 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import vietmobi.net.ecommerce.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    public static final int MY_REQUEST_CODE_ADD = 5;
     BottomNavigationView bottomNavigation;
+    FloatingActionButton btnAddCard;
     ViewPager viewPager;
     Toolbar toolbar;
     private boolean doubleBackToExitPressedOnce = false;
@@ -61,6 +64,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void addEvents() {
+        btnAddCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AddItemsActivity.class);
+                startActivityForResult(intent, MY_REQUEST_CODE_ADD);
+            }
+        });
+
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -161,6 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initViews() {
         bottomNavigation = findViewById(R.id.bottomNavigation);
         viewPager = findViewById(R.id.viewPager);
+        btnAddCard = findViewById(R.id.btnAddCard);
 //        toolbar = findViewById(R.id.toolbar);
 //        toolbar.setTitle("");
     }

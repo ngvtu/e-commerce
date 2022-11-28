@@ -39,7 +39,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
         Items items = listItems.get(position);
         holder.imvItem.setImageResource(items.getImgItems());
         holder.tvNameItem.setText(items.getItemName());
-        holder.tvBranchName.setText(items.getOfBranch());
+        holder.tvBrandName.setText(items.getOfBrand());
         holder.tvPrice.setText(String.valueOf(items.getPrice()));
         holder.tvOldPrice.setText(String.valueOf(items.getOldPrice()));
         holder.tvNewPrice.setText(String.valueOf(items.getNewPrice()));
@@ -52,14 +52,14 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView imvItem, btnAddFavorite;
-        TextView tvBranchName,tvNameItem, tvPrice, tvIsNew, tvOldPrice, tvNewPrice, tvIsSale ;
+        TextView tvBrandName,tvNameItem, tvPrice, tvIsNew, tvOldPrice, tvNewPrice, tvIsSale ;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             this.imvItem = itemView.findViewById(R.id.imgItem);
             this.btnAddFavorite = itemView.findViewById(R.id.btnAddFavorite);
-            this.tvBranchName = itemView.findViewById(R.id.tvBranchName);
+            this.tvBrandName = itemView.findViewById(R.id.tvBrandName);
             this.tvNameItem = itemView.findViewById(R.id.tvNameItem);
             this.tvPrice = itemView.findViewById(R.id.tvPrice);
             this.tvIsNew = itemView.findViewById(R.id.tvIsNew);

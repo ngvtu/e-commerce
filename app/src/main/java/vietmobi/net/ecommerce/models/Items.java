@@ -13,7 +13,7 @@ public class Items {
     }
 
     private int id, imgItems;
-    private String itemName, ofBranch, category, describe;
+    private String itemName, ofBrand, category, describe;
     private Float price, oldPrice, newPrice;
     private boolean isSale, isFavorite;
 
@@ -29,7 +29,7 @@ public class Items {
         HashMap<String, Object> result = new HashMap<>();
         result.put("id", id);
         result.put("itemName", itemName);
-        result.put("ofBranch", ofBranch);
+        result.put("ofBrand", ofBrand);
         result.put("category", category);
         result.put("describe", describe);
         result.put("price", price);
@@ -40,12 +40,12 @@ public class Items {
         return result;
     }
 
-    public Items(int id, int imgItems, String itemName, String describe, String ofBranch, String category, Float price, Float oldPrice, Float newPrice, boolean isSale, boolean isFavorite) {
+    public Items(int id, int imgItems, String itemName, String describe, String ofBrand, String category, Float price, Float oldPrice, Float newPrice, boolean isSale, boolean isFavorite) {
         this.id = id;
         this.describe = describe;
         this.imgItems = imgItems;
         this.itemName = itemName;
-        this.ofBranch = ofBranch;
+        this.ofBrand = ofBrand;
         this.category = category;
         this.price = price;
         this.oldPrice = oldPrice;
@@ -55,28 +55,28 @@ public class Items {
     }
 
 
-    public Items(int imgItems, String itemName, String ofBranch, String category, Float price, boolean isSale, boolean isFavorite) {
+    public Items(int imgItems, String itemName, String ofBrand, String category, Float price, boolean isSale, boolean isFavorite) {
         this.imgItems = imgItems;
         this.itemName = itemName;
-        this.ofBranch = ofBranch;
+        this.ofBrand = ofBrand;
         this.category = category;
         this.price = price;
         this.isSale = isSale;
         this.isFavorite = isFavorite;
     }
 
-    public Items(int imgItems, String itemName, String ofBranch, String category, Float price) {
+    public Items(int imgItems, String itemName, String ofBrand, String category, Float price) {
         this.imgItems = imgItems;
         this.itemName = itemName;
-        this.ofBranch = ofBranch;
+        this.ofBrand = ofBrand;
         this.category = category;
         this.price = price;
     }
 
-    public Items(int imgItems, String itemName, String ofBranch, Float price, Float oldPrice, Float newPrice) {
+    public Items(int imgItems, String itemName, String ofBrand, Float price, Float oldPrice, Float newPrice) {
         this.imgItems = imgItems;
         this.itemName = itemName;
-        this.ofBranch = ofBranch;
+        this.ofBrand = ofBrand;
         this.price = price;
         this.oldPrice = oldPrice;
         this.newPrice = newPrice;
@@ -102,12 +102,12 @@ public class Items {
         this.itemName = itemName;
     }
 
-    public String getOfBranch() {
-        return ofBranch;
+    public String getOfBrand() {
+        return ofBrand;
     }
 
-    public void setOfBranch(String ofBranch) {
-        this.ofBranch = ofBranch;
+    public void setOfBrand(String ofBrand) {
+        this.ofBrand = ofBrand;
     }
 
     public String getCategory() {
